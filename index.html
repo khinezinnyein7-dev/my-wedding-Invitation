@@ -2,32 +2,538 @@
 <html lang="my">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>မောင်ဝေယံကျော် & မခိုင်ဇင်ငြိမ်း မင်္ဂလာဖိတ်စာ</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pyidaungsu:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>မင်္ဂလာဧည့်ခံပွဲဖိတ်ကြားလွှာ - မောင်ဝေယံကျော် + မခိုင်ဇင်ငြိမ်း</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Padauk & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            50: '#fffcf0',
+                            100: '#fef7d6',
+                            200: '#fbe9ab',
+                            300: '#f7d675',
+                            400: '#f3be42',
+                            500: '#d9a01d',
+                            600: '#b87c14',
+                            700: '#935a14',
+                            800: '#794818',
+                            900: '#673c19',
+                        }
+                    },
+                    fontFamily: {
+                        myanmar: ['Padauk', 'Pyidaungsu', 'Myanmar3', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body { font-family: 'Pyidaungsu', sans-serif; background-color: #f7f3eb; margin: 0; padding: 10px; color: #333; text-align: center; }
-        .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 2px solid #d4af37; }
-        h1, h2 { color: #b8860b; }
-        .details { text-align: left; margin: 20px 0; line-height: 1.8; font-size: 16px; background: #faf9f5; padding: 15px; border-radius: 8px; }
-        .btn { display: inline-block; background: #d4af37; color: white; padding: 12px 25px; text-decoration: none; border-radius: 25px; font-weight: bold; margin-top: 15px; }
-        .btn:hover { background: #b8860b; }
+        body {
+            font-family: 'Padauk', 'Pyidaungsu', 'Myanmar3', sans-serif;
+            background-color: #FAF8F5;
+            color: #333333;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .bg-pattern {
+            background-color: #FAF8F5;
+            background-image: radial-gradient(#d9a01d 0.5px, transparent 0.5px), radial-gradient(#d9a01d 0.5px, #FAF8F5 0.5px);
+            background-size: 20px 20px;
+            background-opacity: 0.1;
+        }
+
+        .ornate-card {
+            background: #ffffff;
+            box-shadow: 0 10px 30px rgba(184, 124, 20, 0.12);
+            border: 2px solid #f7d675;
+            position: relative;
+        }
+
+        .ornate-card::before {
+            content: '';
+            position: absolute;
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px solid #f7d675;
+            pointer-events: none;
+        }
+
+        .timer-box {
+            background: rgba(254, 247, 214, 0.4);
+            border: 1px solid #f7d675;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h2>မင်္ဂလာအခါတော်</h2>
-        <h1>မောင်ဝေယံကျော် ❤ မခိုင်ဇင်ငြိမ်း</h1>
-        <p><b>မင်္ဂလာဖိတ်ကြားလွှာ</b></p>
+<body class="bg-pattern antialiased text-gray-800">
+
+    <!-- Audio Player Toggle Floating Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button id="musicToggle" onclick="toggleMusic()" class="w-12 h-12 bg-gold-500 hover:bg-gold-600 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 transform active:scale-95 focus:outline-none" title="Toggle Music">
+            <i id="musicIcon" class="fas fa-music text-lg"></i>
+        </button>
+    </div>
+
+    <!-- Main Container -->
+    <div class="max-w-2xl mx-auto px-4 py-8 md:py-12">
         
-        <div class="details">
-            <p><b>မင်္ဂလာရက်ရက် -</b> သက္ကရာဇ် ၁၃၈၈ ခုနှစ်၊ တန်ဆောင်မုန်းလဆန်း (၁၂)ရက်၊<br>၂၀၂၆ - ၁၁ - ၂၀ (စနေနေ့)</p>
-            <p><b>မင်္ဂလာအချိန် -</b> နံနက် (၉:၀၀)နာရီမှ (၁၂:၀၀)နာရီအထိ</p>
-            <p><b>မင်္ဂလာနေရာ -</b> “လင်တိုင်း၊ ဝရိယတ္တိ ဘုန်းတော်ကြီးကျောင်း”<br>ဗိုလ်ချုပ်လမ်းနှင့် မင်းတန်းလမ်းထောင့်၊ မြို့မ (၂)ရပ်ကွက်၊ လယ်ဝေးမြို့နယ်။</p>
-            <p><b>ဖိတ်ကြားသူများ -</b> ဦးခင်မောင်ဇော် + ဒေါ်ဇာနွယ်ပိုင် တို့၏ သား၊ ကိုသီဟစိုး + မကောက်ယုဖြိုး ၏ ညီ/မောင် မောင်ဝေယံကျော် (Myanmar National Airline) နှင့်<br>ဦးနိုင်ဝင်း + ဒေါ်သန္တာဦး တို့၏ သမီးကြီး မအေးငြိမ်းပြည့်၏ အစ်မ မခိုင်ဇင်ငြိမ်း (ဒုံးပျံအဆင့်မြင့်ဂျုံမှုန့် - Lluvia Limited)</p>
+        <!-- Header Card -->
+        <div class="ornate-card rounded-2xl p-6 md:p-10 text-center mb-8 relative overflow-hidden">
+            
+            <div class="inline-block px-4 py-1 mb-4 rounded-full bg-gold-100 text-gold-800 text-sm font-semibold border border-gold-300">
+                မင်္ဂလာဧည့်ခံပွဲဖိတ်ကြားလွှာ
+            </div>
+
+            <div class="my-6">
+                <h1 class="text-3xl md:text-4xl font-bold text-gold-700 leading-relaxed tracking-wide">
+                    မောင်ဝေယံကျော်
+                </h1>
+                <p class="text-xs md:text-sm text-gray-500 font-medium tracking-wider mb-2">(Myanmar National Airline)</p>
+                
+                <div class="flex items-center justify-center my-3 space-x-3">
+                    <span class="h-px w-12 bg-gold-300"></span>
+                    <span class="text-gold-500 text-xl animate-float">❤️</span>
+                    <span class="h-px w-12 bg-gold-300"></span>
+                </div>
+
+                <h1 class="text-3xl md:text-4xl font-bold text-gold-700 leading-relaxed tracking-wide">
+                    မခိုင်ဇင်ငြိမ်း
+                </h1>
+                <p class="text-xs md:text-sm text-gray-500 font-medium tracking-wider mb-2">ဒုံးပျံအဆင့်မြင့်ဂျုံမှုန့် (Lluvia Limited)</p>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-gold-200 inline-block w-full">
+                <p class="text-gold-800 font-semibold text-lg">
+                    ၂၁ - ၁၁ - ၂၀၂၆ (စနေနေ့)
+                </p>
+                <p class="text-xs text-gray-500">၁၃၈၈ ခုနှစ်၊ တန်ဆောင်မုန်းလဆန်း (၁၂) ရက်</p>
+            </div>
         </div>
 
-        <a href="https://maps.app.goo.gl/AqCLfBFruK6nzWeK8" class="btn" target="_blank">Google Maps ဖြင့်ကြည့်ရန်</a>
+        <!-- Countdown Timer Section -->
+        <div class="bg-white rounded-2xl p-6 shadow-md border border-gold-200 mb-8 text-center">
+            <h3 class="text-gold-800 font-bold mb-4 text-base md:text-lg flex items-center justify-center gap-2">
+                <i class="far fa-clock text-gold-500"></i> မင်္ဂလာပွဲကျင်းပရန် ကျန်ရှိချိန်
+            </h3>
+            <div class="grid grid-cols-4 gap-2 md:gap-4 max-w-md mx-auto">
+                <div class="timer-box p-2 md:p-3 rounded-lg text-center">
+                    <span id="days" class="text-xl md:text-2xl font-bold text-gold-800">00</span>
+                    <span class="block text-xs text-gray-600 mt-1">ရက်</span>
+                </div>
+                <div class="timer-box p-2 md:p-3 rounded-lg text-center">
+                    <span id="hours" class="text-xl md:text-2xl font-bold text-gold-800">00</span>
+                    <span class="block text-xs text-gray-600 mt-1">နာရီ</span>
+                </div>
+                <div class="timer-box p-2 md:p-3 rounded-lg text-center">
+                    <span id="minutes" class="text-xl md:text-2xl font-bold text-gold-800">00</span>
+                    <span class="block text-xs text-gray-600 mt-1">မိနစ်</span>
+                </div>
+                <div class="timer-box p-2 md:p-3 rounded-lg text-center">
+                    <span id="seconds" class="text-xl md:text-2xl font-bold text-gold-800">00</span>
+                    <span class="block text-xs text-gray-600 mt-1">စက္ကန့်</span>
+                </div>
+            </div>
+            
+            <div class="mt-5">
+                <button onclick="addToCalendar()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gold-50 text-gold-700 hover:bg-gold-100 border border-gold-300 text-sm font-semibold transition-all duration-200 shadow-sm active:scale-95">
+                    <i class="far fa-calendar-plus text-gold-600"></i> Google Calendar တွင် မှတ်ထားမည်
+                </button>
+            </div>
+        </div>
+
+        <!-- Event Details Card -->
+        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-md border border-gold-200 mb-8 space-y-6">
+            
+            <div class="text-center pb-4 border-b border-gray-100">
+                <h2 class="text-xl font-bold text-gold-800 mb-1">မင်္ဂလာအစီအစဉ်</h2>
+                <div class="w-16 h-0.5 bg-gold-400 mx-auto"></div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-full bg-gold-100 flex items-center justify-center text-gold-700 shrink-0 mt-1">
+                        <i class="far fa-calendar-alt text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800">မင်္ဂလာနေ့ရက်</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            ၁၃၈၈ ခုနှစ်၊ တန်ဆောင်မုန်းလဆန်း (၁၂) ရက်<br>
+                            <span class="font-semibold text-gold-800">၂၁ - ၁၁ - ၂၀၂၆ (စနေနေ့)</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-full bg-gold-100 flex items-center justify-center text-gold-700 shrink-0 mt-1">
+                        <i class="far fa-clock text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800">မင်္ဂလာအချိန်</h4>
+                        <p class="text-gray-600 text-sm">နံနက် (၉:၀၀) နာရီမှ (၁၂:၀၀) နာရီအထိ</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-full bg-gold-100 flex items-center justify-center text-gold-700 shrink-0 mt-1">
+                        <i class="fas fa-map-marker-alt text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800">မင်္ဂလာနေရာ</h4>
+                        <p class="text-gray-700 text-sm font-semibold leading-relaxed text-gold-800">
+                            "လယ်ကိုင်း ပရိယတ္တိ ဓမ္မဗိမာန်တော်ကြီးကျောင်း"
+                        </p>
+                        <p class="text-gray-600 text-xs md:text-sm leading-relaxed mt-1">
+                            ဗိုလ်ချုပ်လမ်းနှင့် မင်းတန်းလမ်းထောင့်၊ မြို့မ (၂) ရပ်ကွက်၊ လှည်းကူးမြို့နယ်။
+                        </p>
+                        <p class="text-gold-600 text-xs mt-1">
+                            (လမ်းညွှန် - မိုးကောင်းစေတီတော်ဘေး)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Parents & Family Detail Card -->
+        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-md border border-gold-200 mb-8 space-y-6">
+            <div class="text-center pb-4 border-b border-gray-100">
+                <h2 class="text-xl font-bold text-gold-800 mb-1">မင်္ဂလာဧည့်ခံပွဲဖိတ်ကြားလွှာ</h2>
+                <div class="w-16 h-0.5 bg-gold-400 mx-auto"></div>
+            </div>
+
+            <!-- Groom's Family Details -->
+            <div class="bg-gold-50/50 p-4 rounded-xl border border-gold-100 text-sm leading-relaxed space-y-2">
+                <p class="text-gray-700">
+                    ရန်ကုန်တိုင်းဒေသကြီး၊ မြောက်ဥက္ကလာပမြို့နယ်၊ (ည)ရပ်ကွက်၊ ရေကျောင်းလမ်း၊ အမှတ် (၈၉၂)နေ 
+                    <span class="font-semibold text-gray-800">ဦးခင်မောင်ဇော် + ဒေါ်နုနုလှိုင်</span> တို့၏ သားငယ်၊ 
+                    <span class="font-semibold text-gray-800">ကိုသီဟစိုး + မကေသွယ်ဖြိုး</span> တို့၏ ညီ/မောင်၊ 
+                    <span class="font-semibold text-gray-800">မောင်လင်းလက်သာ</span> ၏ ဦးလေး
+                </p>
+                <p class="text-center py-2 text-lg font-bold text-gold-700">
+                    မောင်ဝေယံကျော် <span class="text-xs text-gray-500 font-normal">(Myanmar National Airline)</span>
+                </p>
+            </div>
+
+            <div class="text-center text-gold-500 font-serif italic text-lg">&amp;</div>
+
+            <!-- Bride's Family Details -->
+            <div class="bg-gold-50/50 p-4 rounded-xl border border-gold-100 text-sm leading-relaxed space-y-2">
+                <p class="text-gray-700">
+                    ရန်ကုန်တိုင်းဒေသကြီး၊ လှည်းကူးမြို့နယ်၊ မြို့မ (၂) ရပ်ကွက်၊ လမ်းသွယ် (၆)လမ်း၊ အမှတ် (၇)နေ 
+                    <span class="font-semibold text-gray-800">ဦးနိုင်ဝင်း + ဒေါ်ညှာဦး</span> တို့၏ သမီးကြီး၊ 
+                    <span class="font-semibold text-gray-800">မအေးငြိမ်းပြည့်</span> ၏ အစ်မ
+                </p>
+                <p class="text-center py-2 text-lg font-bold text-gold-700">
+                    မခိုင်ဇင်ငြိမ်း <span class="text-xs text-gray-500 font-normal">ဒုံးပျံအဆင့်မြင့်ဂျုံမှုန့် (Lluvia Limited)</span>
+                </p>
+            </div>
+
+            <p class="text-center text-sm text-gray-600 italic pt-2">
+                တို့၏ "မင်္ဂလာဧည့်ခံပွဲ" သို့ ကြွရောက်ပါရန် ခင်မင်ရင်းနှီးစွာဖြင့် ဖိတ်ကြားအပ်ပါသည်။
+            </p>
+        </div>
+
+        <!-- Location Map & QR Code Section -->
+        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-md border border-gold-200 mb-8">
+            <div class="text-center mb-6">
+                <h2 class="text-xl font-bold text-gold-800 mb-1">မင်္ဂလာပွဲကျင်းပမည့်နေရာ မြေပုံ</h2>
+                <p class="text-xs text-gray-500">Google Maps ဖြင့် သွားရောက်ရန် လမ်းကြောင်းရှာနိုင်ပါသည်။</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <!-- QR Code Box -->
+                <div class="w-full md:w-1/2 flex flex-col items-center justify-center p-4 bg-gold-50/60 rounded-xl border border-gold-200 text-center">
+                    <p class="text-xs font-semibold text-gold-800 mb-2">QR Code စကန်ဖတ်၍ မြေပုံကြည့်ရန်</p>
+                    <a href="https://maps.app.goo.gl/AqCLfBFruK6nzWeK8" target="_blank" rel="noopener noreferrer" class="bg-white p-3 rounded-lg shadow-sm border border-gold-200 block transition-transform active:scale-95">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fmaps.app.goo.gl%2FAqCLfBFruK6nzWeK8" 
+                             alt="Location Map QR Code" 
+                             class="w-40 h-40 mx-auto object-contain"
+                             onerror="this.onerror=null; this.src='https://placehold.co/200x200/f7d675/794818?text=Map+QR+Code';">
+                    </a>
+                    <span class="text-[11px] text-gray-500 mt-2">iOS / Android ဖုန်းမရွေး QR နှိပ်၍ တိုက်ရိုက်ကြည့်နိုင်ပါသည်</span>
+                </div>
+
+                <!-- Google Maps Button Container -->
+                <div class="w-full md:w-1/2 flex flex-col justify-center items-center space-y-4">
+                    <div class="text-center p-4 rounded-xl bg-gold-50 border border-gold-200 w-full">
+                        <i class="fas fa-map-marked-alt text-4xl text-gold-600 mb-2"></i>
+                        <h4 class="font-bold text-gold-800 text-sm">လယ်ကိုင်း ပရိယတ္တိ ဓမ္မဗိမာန်တော်ကြီးကျောင်း</h4>
+                        <p class="text-xs text-gray-600 mt-1">မင်းတန်းလမ်းနှင့် ဗိုလ်ချုပ်လမ်းထောင့်၊ မြို့မ (၂) ရပ်ကွက်၊ လှည်းကူးမြို့နယ်</p>
+                    </div>
+
+                    <a href="https://maps.app.goo.gl/AqCLfBFruK6nzWeK8" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full py-3.5 px-4 bg-gold-500 hover:bg-gold-600 text-white font-bold rounded-xl text-center shadow-md flex items-center justify-center gap-2 transition-all duration-200 text-sm active:scale-95">
+                        <i class="fas fa-external-link-alt"></i> Google Maps တွင် ကြည့်မည်
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- RSVP Form Card -->
+        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-md border border-gold-200 mb-8">
+            <div class="text-center mb-6">
+                <h2 class="text-xl font-bold text-gold-800 mb-1">တက်ရောက်နိုင်မှု အကြောင်းပြန်ရန် (RSVP)</h2>
+                <p class="text-xs text-gray-500">ကြွရောက်ပါမည်ကို ကြိုတင်အကြောင်းပြန်ပေးပါရန် မေတ္တာရပ်ခံအပ်ပါသည်။</p>
+            </div>
+
+            <form id="rsvpForm" onsubmit="submitRSVP(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">ဧည့်သည်အမည် *</label>
+                    <input type="text" id="rsvpName" required placeholder="ဥပမာ - ဦးမြ / ဒေါ်လှ" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gold-400 focus:border-gold-400 outline-none text-sm">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">တက်ရောက်မည့် ဧည့်သည်အရေအတွက် *</label>
+                    <select id="rsvpCount" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gold-400 focus:border-gold-400 outline-none text-sm bg-white">
+                        <option value="1">၁ ယောက်</option>
+                        <option value="2">၂ ယောက်</option>
+                        <option value="3">၃ ယောက်</option>
+                        <option value="4">၄ ယောက် သို့မဟုတ် ၄ ယောက်ထက်ပို၍</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">တက်ရောက်နိုင်မှု အခြေအနေ *</label>
+                    <div class="flex items-center gap-6 mt-1">
+                        <label class="flex items-center gap-2 cursor-pointer text-sm">
+                            <input type="radio" name="attendance" value="attending" checked class="text-gold-600 focus:ring-gold-400">
+                            <span>ဝမ်းမြောက်စွာ တက်ရောက်ပါမည်</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm">
+                            <input type="radio" name="attendance" value="declined" class="text-gold-600 focus:ring-gold-400">
+                            <span>မတက်ရောက်နိုင်ပါ</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">ဆုတောင်းစကား (ဆန္ဒရှိပါက)</label>
+                    <textarea id="rsvpMessage" rows="3" placeholder="သတို့သား သတို့သမီးအတွက် မင်္ဂလာဆုတောင်းစကား..." class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gold-400 focus:border-gold-400 outline-none text-sm"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-3 bg-gold-600 hover:bg-gold-700 text-white font-bold rounded-xl shadow-md transition-all duration-200 active:scale-95">
+                    အတည်ပြု အကြောင်းပြန်မည်
+                </button>
+            </form>
+
+            <div id="rsvpFeedback" class="hidden mt-4 p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-center text-sm font-medium">
+                ✅ အကြောင်းပြန်ကြားချက်အတွက် ကျေးဇူးတင်ရှိပါသည်။
+            </div>
+        </div>
+
+        <!-- Universal Native & Web Sharing Section -->
+        <div class="bg-white rounded-2xl p-6 shadow-md border border-gold-200 text-center mb-8">
+            <h3 class="text-gold-800 font-bold mb-3 text-base">ဖိတ်စာအား အခြားသူများထံ မျှဝေရန် (Share Invitation)</h3>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <!-- Mobile Universal Native Share Button (Triggers iOS/Android native share popup) -->
+                <button onclick="shareNative()" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-sm active:scale-95">
+                    <i class="fas fa-share-alt text-base"></i> ဖိတ်စာလင့်ခ် မျှဝေမည် (Share)
+                </button>
+
+                <button onclick="copyInvitationLink()" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-sm flex items-center justify-center gap-2 border border-gray-300 shadow-sm active:scale-95">
+                    <i class="far fa-copy text-base"></i> Link Copy ကူးမည်
+                </button>
+            </div>
+            
+            <div id="copyToast" class="hidden text-xs text-emerald-600 mt-3 font-medium">
+                ✅ ဖိတ်စာ Link ကို Copy ကူးယူပြီးပါပြီ! Viber/Messenger တို့တွင် Paste လုပ်၍ ပေးပို့နိုင်ပါသည်။
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center text-xs text-gray-500 py-4">
+            <p>© 2026 မောင်ဝေယံကျော် ❤️ မခိုင်ဇင်ငြိမ်း မင်္ဂလာလက်ထပ်ပွဲ</p>
+            <p class="mt-1">ကြွရောက်ချီးမြှင့်ပါသော ဧည့်သည်တော်များအားလုံးကို အထူးပင် ကျေးဇူးတင်ရှိပါသည်။</p>
+        </footer>
+
     </div>
+
+    <!-- Web Audio Synthesizer Background Music Melody -->
+    <script>
+        let audioCtx = null;
+        let isPlaying = false;
+        let melodyInterval = null;
+
+        function playWeddingMelody() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const notes = [
+                261.63, 329.63, 392.00, 523.25,
+                349.23, 440.00, 523.25, 698.46,
+                392.00, 493.88, 587.33, 783.99,
+                523.25, 659.25, 783.99, 1046.50
+            ];
+            let noteIdx = 0;
+
+            melodyInterval = setInterval(() => {
+                if (!isPlaying) return;
+                
+                try {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(notes[noteIdx], audioCtx.currentTime);
+
+                    gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
+
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 1.2);
+
+                    noteIdx = (noteIdx + 1) % notes.length;
+                } catch (e) {
+                    console.log('Audio playback error:', e);
+                }
+            }, 800);
+        }
+
+        function toggleMusic() {
+            const btn = document.getElementById('musicToggle');
+            const icon = document.getElementById('musicIcon');
+
+            if (!isPlaying) {
+                isPlaying = true;
+                playWeddingMelody();
+                btn.classList.add('bg-gold-600');
+                icon.className = 'fas fa-volume-up text-lg';
+            } else {
+                isPlaying = false;
+                if (melodyInterval) clearInterval(melodyInterval);
+                btn.classList.remove('bg-gold-600');
+                icon.className = 'fas fa-music text-lg';
+            }
+        }
+
+        const weddingDate = new Date('2026-11-21T09:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                document.getElementById('days').innerText = "00";
+                document.getElementById('hours').innerText = "00";
+                document.getElementById('minutes').innerText = "00";
+                document.getElementById('seconds').innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+            document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        function submitRSVP(e) {
+            e.preventDefault();
+            const name = document.getElementById('rsvpName').value;
+            const count = document.getElementById('rsvpCount').value;
+            const status = document.querySelector('input[name="attendance"]:checked').value;
+            const message = document.getElementById('rsvpMessage').value;
+
+            const rsvpData = { name, count, status, message, timestamp: new Date().toISOString() };
+            
+            const responses = JSON.parse(localStorage.getItem('wedding_rsvp') || '[]');
+            responses.push(rsvpData);
+            localStorage.setItem('wedding_rsvp', JSON.stringify(responses));
+
+            const feedback = document.getElementById('rsvpFeedback');
+            feedback.classList.remove('hidden');
+            document.getElementById('rsvpForm').reset();
+
+            setTimeout(() => {
+                feedback.classList.add('hidden');
+            }, 5000);
+        }
+
+        function addToCalendar() {
+            const title = encodeURIComponent("မောင်ဝေယံကျော် + မခိုင်ဇင်ငြိမ်း မင်္ဂလာဧည့်ခံပွဲ");
+            const details = encodeURIComponent("မောင်ဝေယံကျော် (Myanmar National Airline) နှင့် မခိုင်ဇင်ငြိမ်း ဒုံးပျံအဆင့်မြင့်ဂျုံမှုန့် (Lluvia Limited) တို့၏ မင်္ဂလာဧည့်ခံပွဲ");
+            const location = encodeURIComponent("လယ်ကိုင်း ပရိယတ္တိ ဓမ္မဗိမာန်တော်ကြီးကျောင်း၊ ဗိုလ်ချုပ်လမ်းနှင့် မင်းတန်းလမ်းထောင့်၊ မြို့မ (၂) ရပ်ကွက်၊ လှည်းကူးမြို့နယ်။");
+            const dates = "20261121T023000Z/20261121T053000Z";
+
+            const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`;
+            window.open(googleCalUrl, '_blank');
+        }
+
+        function shareNative() {
+            const shareData = {
+                title: 'မောင်ဝေယံကျော် + မခိုင်ဇင်ငြိမ်း မင်္ဂလာဧည့်ခံပွဲ',
+                text: 'မောင်ဝေယံကျော် နှင့် မခိုင်ဇင်ငြိမ်း တို့၏ မင်္ဂလာဧည့်ခံပွဲ ဖိတ်ကြားလွှာ',
+                url: window.location.href
+            };
+
+            if (navigator.share) {
+                navigator.share(shareData).catch((err) => console.log('Share error:', err));
+            } else {
+                copyInvitationLink();
+            }
+        }
+
+        function copyInvitationLink() {
+            const currentUrl = window.location.href;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(currentUrl).then(() => showToast()).catch(() => fallbackCopy(currentUrl));
+            } else {
+                fallbackCopy(currentUrl);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const tempInput = document.createElement('input');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showToast();
+        }
+
+        function showToast() {
+            const copyToast = document.getElementById('copyToast');
+            copyToast.classList.remove('hidden');
+            setTimeout(() => copyToast.classList.add('hidden'), 3500);
+        }
+    </script>
 </body>
 </html>
